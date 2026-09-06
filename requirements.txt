@@ -1,6 +1,6 @@
 fastapi
 uvicorn
-chromadb
-pypdf
 requests
 pydantic
+PyMuPDF
+chromadb
