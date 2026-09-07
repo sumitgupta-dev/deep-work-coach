@@ -85,3 +85,8 @@ So, that's the work flow, then use api for server connection with frontend.
     Ensures the data coming into the API (like the user's question) is correctly formatted.
 
 ![alt text](image.png)
+
+If you want frontend too.. Then just type this..
+```bash
+python frontend.py
+```
