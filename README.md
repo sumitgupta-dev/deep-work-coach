@@ -13,6 +13,47 @@ Also you could ask questions from ai, I believe real learning happen when you as
 
 ---
 
+### 🚀 How to Run Locally
+
+**1. Prerequisites**
+*   Install [Python 3.10+](https://www.python.org/downloads/)
+*   Install [Ollama](https://ollama.com/) and ensure the app is running in the background.
+
+**2. Clone the Repository**
+```bash
+git clone https://github.com/sumitgupta-dev/deep-work-coach.git
+cd deep-work-coach
+```
+
+**3. Download the AI Models (via Ollama)**
+Open your terminal and run these commands to pull the required models:
+```bash
+ollama pull llama3.2:1b
+ollama pull nomic-embed-text
+```
+
+**4. Install Python Dependencies**
+*(It is recommended to use a virtual environment)*
+```bash
+pip install -r requirements.txt
+```
+
+**5. Start the Server**
+```bash
+uvicorn main:app --reload
+```
+*(Because the `chroma_db` folder is included, the server will start instantly and skip the embedding process!)*
+
+**6. Test the API**
+Open your browser and go to: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+*   Click the `POST /chat` endpoint.
+*   Click **"Try it out"**.
+*   Enter a question like: `{"user_text": "What is deep work?"}`
+*   Click **Execute** and view the AI response and the book sources used!
+
+---
+
+
 
 **Project building process:**
 Fist we take a book then split it in many chunks. 
