@@ -4,11 +4,12 @@ import chromadb
 from app.ollama_client import ask_ai, get_embedding
 
 # ─── CONFIG ───────────────────────────────────────────────
-PDF_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "deep_work.pdf")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+PDF_PATH = os.path.join(BASE_DIR, "..", "data", "deep_work.pdf")
 CHUNK_SIZE = 800        # characters per chunk
 CHUNK_OVERLAP = 100     # overlap so we don't cut sentences in half
 COLLECTION_NAME = "deep_work_book"
-DB_PATH = os.path.join(os.path.dirname(__file__), "..", "chroma_db")
+DB_PATH = os.path.join(BASE_DIR, "..", "chroma_db")
 # ──────────────────────────────────────────────────────────
 
 # Initialize ChromaDB (a local vector database)
@@ -42,6 +43,13 @@ def chunk_text(text: str, chunk_size: int = CHUNK_SIZE, overlap: int = CHUNK_OVE
         start = end - overlap  # move forward but overlap with previous
     return chunks
 
+    """
+    s1 = "hellowrold"
+    chunk1 = "hellow"
+
+    then if it's getting negate then chenk2 would be some part of chunk one like 
+    chunk2 = "lowrold"
+    """
 
 def build_vector_store():
     """
@@ -89,8 +97,18 @@ def retrieve_relevant_chunks(query: str, n_results: int = 3) -> list[str]:
     )
     return results["documents"][0]
 
+"""
+The above code is little difficult to grasp.
+but here's the simple logic.
+
+first it's making the user query into embedding, in collection.query it's ask hey collection does this kind of embedding exicts there?
+IF there is then return me 3 colsely related embedding. and ["documents"] return like this [[]] so we terminate one [] by [0]
+it's return 3 closly string using his head like search engine but in ai way.
+"""
+
 
 def build_prompt(query: str, retrieved_chunks: list[str]) -> str:
+
     """
     Step 6: Build a custom prompt that combines:
       - Instructions for the AI
